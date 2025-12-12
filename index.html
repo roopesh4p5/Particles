@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of Particles | Hand-Controlled Universe</title>
+    <meta name="description"
+        content="Control a universe of particles with your hands. Create stars, galaxies, and cosmic phenomena with gestures.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="cosmic-loader">
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="orbit orbit-3"></div>
+                <div class="core"></div>
+            </div>
+            <h1>AWAKENING THE COSMOS</h1>
+            <p class="loading-text">Initializing particle matrix...</p>
+        </div>
+    </div>
+
+    <!-- Permission Screen -->
+    <div id="permission-screen" class="hidden">
+        <div class="permission-content">
+            <div class="hand-icon">
+                <svg viewBox="0 0 100 100" class="hand-svg">
+                    <path d="M50 10 L50 25 M35 15 L35 30 M20 25 L20 45 M65 15 L65 30 M80 25 L80 45"
+                        stroke="url(#handGradient)" stroke-width="8" stroke-linecap="round" fill="none" />
+                    <path d="M15 45 Q15 80 50 90 Q85 80 85 45 L85 45 Q85 35 75 35 L25 35 Q15 35 15 45"
+                        stroke="url(#handGradient)" stroke-width="4" fill="none" />
+                    <defs>
+                        <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00f5ff" />
+                            <stop offset="50%" style="stop-color:#bf00ff" />
+                            <stop offset="100%" style="stop-color:#ff006e" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1>BECOME THE GOD OF PARTICLES</h1>
+            <p>Grant camera access to control the universe with your hands</p>
+            <button id="enable-camera" class="cosmic-button">
+                <span>AWAKEN POWERS</span>
+                <div class="button-glow"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Camera Feed (mirrored, small preview) -->
+    <video id="camera-feed" autoplay playsinline></video>
+    <canvas id="hand-canvas"></canvas>
+
+    <!-- HUD Overlay -->
+    <div id="hud" class="hidden">
+        <div class="hud-top">
+            <div class="stat-box">
+                <span class="stat-label">PARTICLES</span>
+                <span id="particle-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">POWER</span>
+                <span id="power-level" class="stat-value">IDLE</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">GESTURE</span>
+                <span id="current-gesture" class="stat-value">NONE</span>
+            </div>
+        </div>
+
+        <div class="hud-left">
+            <h4 class="hud-section-title">CONTROLS</h4>
+            <div class="gesture-hint">
+                <div class="gesture-icon"></div>
+                <span>✋ Open Palm → CREATE</span>
+            </div>
+            <div class="gesture-hint">
+                <div class="gesture-icon"></div>
+                <span>✊ Fist → DESTROY</span>
+            </div>
+            <div class="gesture-hint">
+                <div class="gesture-icon"></div>
+                <span>☝️ Point → ATTRACT</span>
+            </div>
+            <div class="gesture-hint">
+                <div class="gesture-icon"></div>
+                <span>✌️ Peace → REPEL</span>
+            </div>
+            <div class="gesture-hint">
+                <div class="gesture-icon"></div>
+                <span>🤏 Pinch → SPIN</span>
+            </div>
+
+            <h4 class="hud-section-title dual">DUAL HANDS</h4>
+            <div class="gesture-hint dual">
+                <div class="gesture-icon"></div>
+                <span>Same Gesture → 1.5x POWER</span>
+            </div>
+            <div class="gesture-hint dual">
+                <div class="gesture-icon"></div>
+                <span>Create + Destroy → CHAOS</span>
+            </div>
+            <div class="gesture-hint dual">
+                <div class="gesture-icon"></div>
+                <span>Both Pinch → SUPERNOVA</span>
+            </div>
+        </div>
+
+        <div class="hud-bottom">
+            <div class="color-selector">
+                <button class="color-btn active" data-color="cosmic" title="Cosmic"></button>
+                <button class="color-btn" data-color="fire" title="Fire"></button>
+                <button class="color-btn" data-color="ocean" title="Ocean"></button>
+                <button class="color-btn" data-color="nature" title="Nature"></button>
+                <button class="color-btn" data-color="void" title="Void"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466862/camera_utils.min.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
